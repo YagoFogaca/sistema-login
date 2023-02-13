@@ -1,0 +1,13 @@
+{
+  "name": "login",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index.js"
+  },
+  "author": "Yago Fogaça",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.13.0"
+  }
+}
