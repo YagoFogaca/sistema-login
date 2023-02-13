@@ -1,11 +1,11 @@
 import { randomUUID } from 'crypto';
-import { CreateUserDto } from '../interfaces/user/user.create';
+import { CreateUser } from '../interfaces/user/user.create';
 
-export class IUserValidation {
+export class UserValidation {
     email: string;
     name: string;
     password: string;
-    constructor({ email, name, password }: CreateUserDto) {
+    constructor({ email, name, password }: CreateUser) {
         this.email = email;
         this.name = name;
         this.password = password;
@@ -24,11 +24,14 @@ export class IUserValidation {
     }
 
     printUser() {
+        this.validateName();
+        this.validatePassword();
         return {
             id: randomUUID(),
             email: this.email,
             name: this.name,
             password: this.password,
+            authentication: false,
         };
     }
 }

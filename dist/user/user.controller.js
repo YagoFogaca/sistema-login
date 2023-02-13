@@ -9,34 +9,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserService = void 0;
-const user_validation_1 = require("./user.validation");
-class UserService {
-    constructor(userRepository) {
-        this.userRepository = userRepository;
+exports.UserController = void 0;
+class UserController {
+    constructor(userService) {
+        this.userService = userService;
     }
-    create(user) {
+    create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const validateEmail = yield this.userRepository.findByEmail(user.email);
-                if (validateEmail) {
-                    throw new Error('Esse email já está cadastrado');
-                }
-                const userValidation = new user_validation_1.UserValidation(user).printUser();
-                // Somente para verificar se ira funcionar
-                console.log(userValidation);
-                return yield this.userRepository.create(userValidation);
+                const data = yield this.userService.create(req.body);
+                res.send(data);
             }
             catch (error) {
                 console.log(error);
             }
         });
     }
-    findByEmail() {
-        return __awaiter(this, void 0, void 0, function* () { });
-    }
-    login() {
-        return __awaiter(this, void 0, void 0, function* () { });
-    }
 }
-exports.UserService = UserService;
+exports.UserController = UserController;

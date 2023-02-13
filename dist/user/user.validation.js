@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.IUserValidation = void 0;
+exports.UserValidation = void 0;
 const crypto_1 = require("crypto");
-class IUserValidation {
+class UserValidation {
     constructor({ email, name, password }) {
         this.email = email;
         this.name = name;
@@ -19,12 +19,15 @@ class IUserValidation {
         }
     }
     printUser() {
+        this.validateName();
+        this.validatePassword();
         return {
             id: (0, crypto_1.randomUUID)(),
             email: this.email,
             name: this.name,
             password: this.password,
+            authentication: false,
         };
     }
 }
-exports.IUserValidation = IUserValidation;
+exports.UserValidation = UserValidation;

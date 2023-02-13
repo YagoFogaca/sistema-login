@@ -9,34 +9,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserService = void 0;
-const user_validation_1 = require("./user.validation");
-class UserService {
-    constructor(userRepository) {
-        this.userRepository = userRepository;
+exports.UserRepository = void 0;
+class UserRepository {
+    constructor(prisma) {
+        this.prisma = prisma;
     }
     create(user) {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const validateEmail = yield this.userRepository.findByEmail(user.email);
-                if (validateEmail) {
-                    throw new Error('Esse email já está cadastrado');
-                }
-                const userValidation = new user_validation_1.UserValidation(user).printUser();
-                // Somente para verificar se ira funcionar
-                console.log(userValidation);
-                return yield this.userRepository.create(userValidation);
-            }
-            catch (error) {
-                console.log(error);
-            }
+            return yield this.prisma.user.create({ data: user });
         });
     }
-    findByEmail() {
-        return __awaiter(this, void 0, void 0, function* () { });
+    findByEmail(email) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.prisma.user.findFirst({ where: { email: email } });
+        });
     }
-    login() {
+    // A fazer depois do sistema de validar email
+    update() {
         return __awaiter(this, void 0, void 0, function* () { });
     }
 }
-exports.UserService = UserService;
+exports.UserRepository = UserRepository;
