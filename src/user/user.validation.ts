@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import { CreateUserDto } from '../dto/create-user.dto';
+import { CreateUserDto } from '../interfaces/user/user.create';
 
 export class IUserValidation {
     email: string;
