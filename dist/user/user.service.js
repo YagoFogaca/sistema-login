@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
+const system_email_1 = require("../system-email");
 const user_validation_1 = require("./user.validation");
 class UserService {
     constructor(userRepository) {
@@ -23,9 +24,10 @@ class UserService {
                     throw new Error('Esse email já está cadastrado');
                 }
                 const userValidation = new user_validation_1.UserValidation(user).printUser();
-                // Somente para verificar se ira funcionar
-                console.log(userValidation);
-                return yield this.userRepository.create(userValidation);
+                const userCreated = yield this.userRepository.create(userValidation);
+                // gerar cod aqui, criptografar ele e salvar junto com o perfil
+                (0, system_email_1.AuthenticationEmail)(userCreated.email);
+                return 'Usuário criado com sucesso';
             }
             catch (error) {
                 console.log(error);

@@ -1,4 +1,5 @@
 import { CreateUser } from '../interfaces/user/user.create';
+import { AuthenticationEmail } from '../system-email';
 import { UserRepository } from './user.repository';
 import { UserValidation } from './user.validation';
 
@@ -15,10 +16,16 @@ export class UserService {
             }
 
             const userValidation = new UserValidation(user).printUser();
-            // Somente para verificar se ira funcionar
-            console.log(userValidation);
 
-            return await this.userRepository.create(userValidation);
+            const userCreated = await this.userRepository.create(
+                userValidation,
+            );
+
+            // gerar cod aqui, criptografar ele e salvar junto com o perfil
+
+            AuthenticationEmail(userCreated.email);
+
+            return 'Usuário criado com sucesso';
         } catch (error) {
             console.log(error);
         }
