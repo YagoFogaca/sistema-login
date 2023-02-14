@@ -19,14 +19,30 @@ class UserRepository {
             return yield this.prisma.user.create({ data: user });
         });
     }
+    findAll() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.prisma.user.findMany();
+        });
+    }
     findByEmail(email) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.prisma.user.findFirst({ where: { email: email } });
         });
     }
-    // A fazer depois do sistema de validar email
-    update() {
-        return __awaiter(this, void 0, void 0, function* () { });
+    findById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.prisma.user.findFirst({ where: { id: id } });
+        });
+    }
+    delete(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.prisma.user.delete({ where: { id: id } });
+        });
+    }
+    update(id, user) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.prisma.user.update({ where: { id: id }, data: user });
+        });
     }
 }
 exports.UserRepository = UserRepository;

@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { IUser } from '../interfaces/user/user.entity';
+import { UpdateUser } from '../interfaces/user/user.update';
 
 export class UserRepository {
     constructor(private readonly prisma: PrismaClient) {}
@@ -8,10 +9,23 @@ export class UserRepository {
         return await this.prisma.user.create({ data: user });
     }
 
-    async findByEmail(email: string) {
+    async findAll(): Promise<IUser[]> {
+        return await this.prisma.user.findMany();
+    }
+
+    async findByEmail(email: string): Promise<IUser | null> {
         return await this.prisma.user.findFirst({ where: { email: email } });
     }
 
-    // A fazer depois do sistema de validar email
-    async update() {}
+    async findById(id: string): Promise<IUser | null> {
+        return await this.prisma.user.findFirst({ where: { id: id } });
+    }
+
+    async delete(id: string): Promise<IUser> {
+        return await this.prisma.user.delete({ where: { id: id } });
+    }
+
+    async update(id: string, user: UpdateUser): Promise<IUser> {
+        return await this.prisma.user.update({ where: { id: id }, data: user });
+    }
 }

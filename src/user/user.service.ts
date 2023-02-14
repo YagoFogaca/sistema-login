@@ -23,6 +23,34 @@ export class UserService {
             console.log(error);
         }
     }
-    async findByEmail() {}
-    async login() {}
+
+    async findAll() {
+        return await this.userRepository.findAll();
+    }
+
+    async findById(id: string) {
+        try {
+            const user = await this.userRepository.findById(id);
+            if (!user) {
+                throw new Error('Nenhum usuário com esse id');
+            }
+            return user;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async delete(id: string) {
+        try {
+            const user = await this.userRepository.delete(id);
+            if (!user) {
+                throw new Error('Nenhum usuário com esse id');
+            }
+            return user;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async update() {}
 }

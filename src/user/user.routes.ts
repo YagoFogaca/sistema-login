@@ -12,6 +12,18 @@ export class UserRotes {
             this.userController.create(req, res);
         });
 
+        this.router.get('/find-all', (req, res) => {
+            this.userController.findAll(req, res);
+        });
+
+        this.router.get('/find/:id', (req, res) => {
+            this.userController.findById(req, res);
+        });
+
+        this.router.delete('/delete/:id', (req, res) => {
+            this.userController.delete(req, res);
+        });
+
         return this.router;
     }
 }

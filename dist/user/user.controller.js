@@ -25,5 +25,38 @@ class UserController {
             }
         });
     }
+    findAll(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield this.userService.findAll();
+                res.send(data);
+            }
+            catch (error) {
+                console.log(error);
+            }
+        });
+    }
+    findById(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield this.userService.findById(req.params.id);
+                res.send(data);
+            }
+            catch (error) {
+                console.log(error);
+            }
+        });
+    }
+    delete(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield this.userService.delete(req.params.id);
+                res.send(data);
+            }
+            catch (error) {
+                console.log(error);
+            }
+        });
+    }
 }
 exports.UserController = UserController;

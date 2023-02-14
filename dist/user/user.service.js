@@ -32,10 +32,40 @@ class UserService {
             }
         });
     }
-    findByEmail() {
-        return __awaiter(this, void 0, void 0, function* () { });
+    findAll() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.userRepository.findAll();
+        });
     }
-    login() {
+    findById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const user = yield this.userRepository.findById(id);
+                if (!user) {
+                    throw new Error('Nenhum usuário com esse id');
+                }
+                return user;
+            }
+            catch (error) {
+                console.log(error);
+            }
+        });
+    }
+    delete(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const user = yield this.userRepository.delete(id);
+                if (!user) {
+                    throw new Error('Nenhum usuário com esse id');
+                }
+                return user;
+            }
+            catch (error) {
+                console.log(error);
+            }
+        });
+    }
+    update() {
         return __awaiter(this, void 0, void 0, function* () { });
     }
 }

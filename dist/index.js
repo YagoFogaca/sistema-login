@@ -35,5 +35,5 @@ const user = (0, user_factory_1.UserFactory)(router);
 app.use(express_1.default.json());
 app.use('/user', user.Routes());
 app.listen(port, () => {
-    console.log('Server started');
+    console.log('Server started', port);
 });
