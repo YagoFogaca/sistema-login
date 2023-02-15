@@ -16,12 +16,12 @@ model user {
   email          String  @unique
   password       String
   authentication Boolean
-  auth           auth[]
+  auth           auth?
 }
 
 model auth {
   id       String @id @unique
   id_user  user   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId   String
+  userId   String @unique
   cod_auth String
 }
