@@ -31,7 +31,10 @@ class UserRepository {
     }
     findById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.prisma.user.findFirst({ where: { id: id } });
+            return yield this.prisma.user.findFirst({
+                where: { id: id },
+                include: { auth: true },
+            });
         });
     }
     delete(id) {
@@ -42,6 +45,16 @@ class UserRepository {
     update(id, user) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.prisma.user.update({ where: { id: id }, data: user });
+        });
+    }
+    createAuth(auth) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.prisma.auth.create({ data: auth });
+        });
+    }
+    findByIdUser(userId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.prisma.auth.findFirst({ where: { userId: userId } });
         });
     }
 }

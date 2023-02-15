@@ -10,9 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
-const system_email_1 = require("../system-email");
-const bcrypt_1 = require("./bcrypt");
+const crypto_1 = require("crypto");
+const bcrypt_1 = require("../bcrypt");
 const user_validation_1 = require("./user.validation");
+const jwt_1 = require("../jwt");
 class UserService {
     constructor(userRepository) {
         this.userRepository = userRepository;
@@ -27,9 +28,14 @@ class UserService {
                 const userValidation = new user_validation_1.UserValidation(user).printUser();
                 const userCreated = yield this.userRepository.create(userValidation);
                 const cod = Math.floor(Math.random() * 89999) + 10000;
-                (0, system_email_1.AuthenticationEmail)({ to: userCreated.email, cod: cod });
+                //AuthenticationEmail({ to: userCreated.email, cod: cod });
                 const codHash = bcrypt_1.Bcrypt.Hash(cod.toString());
-                return 'Usuário criado com sucesso';
+                const authCreated = yield this.userRepository.createAuth({
+                    cod_auth: codHash,
+                    userId: userCreated.id,
+                    id: (0, crypto_1.randomUUID)(),
+                });
+                return jwt_1.Jwt.Sing(authCreated);
             }
             catch (error) {
                 console.log(error);
