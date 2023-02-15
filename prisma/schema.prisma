@@ -21,7 +21,7 @@ model user {
 
 model auth {
   id       String @id @unique
-  id_user  user   @relation(fields: [userId], references: [id])
+  id_user  user   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId   String
   cod_auth String
 }
