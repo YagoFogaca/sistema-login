@@ -1,10 +1,10 @@
 import { randomUUID } from 'crypto';
 import { CreateUser } from '../interfaces/user/user.create';
-import { AuthenticationEmail } from '../system-email';
-import { Bcrypt } from '../bcrypt';
+import { AuthenticationEmail } from '../utils/system-email';
+import { Bcrypt } from '../utils/bcrypt';
 import { UserRepository } from './user.repository';
 import { UserValidation } from './user.validation';
-import { Jwt } from '../jwt';
+import { Jwt } from '../utils/jwt';
 
 export class UserService {
     constructor(private readonly userRepository: UserRepository) {}
@@ -25,7 +25,7 @@ export class UserService {
             );
 
             const cod = Math.floor(Math.random() * 89999) + 10000;
-            //AuthenticationEmail({ to: userCreated.email, cod: cod });
+            AuthenticationEmail({ to: userCreated.email, cod: cod });
             const codHash = Bcrypt.Hash(cod.toString());
 
             const authCreated = await this.userRepository.createAuth({

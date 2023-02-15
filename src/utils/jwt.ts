@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { IAuth } from './interfaces/auth/auth.entity';
+import { IAuth } from '../interfaces/auth/auth.entity';
 
 export class Jwt {
     static Sing(auth: IAuth) {

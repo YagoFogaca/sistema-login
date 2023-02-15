@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import { TAuthenticationEmail } from './types';
+import { TAuthenticationEmail } from '../types';
 
 export function AuthenticationEmail({ cod, to }: TAuthenticationEmail) {
     const transporter = nodemailer.createTransport({
