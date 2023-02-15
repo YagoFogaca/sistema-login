@@ -1,5 +1,6 @@
 import { CreateUser } from '../interfaces/user/user.create';
 import { AuthenticationEmail } from '../system-email';
+import { Bcrypt } from './bcrypt';
 import { UserRepository } from './user.repository';
 import { UserValidation } from './user.validation';
 
@@ -21,9 +22,9 @@ export class UserService {
                 userValidation,
             );
 
-            // gerar cod aqui, criptografar ele e salvar junto com o perfil
-
-            AuthenticationEmail(userCreated.email);
+            const cod = Math.floor(Math.random() * 89999) + 10000;
+            AuthenticationEmail({ to: userCreated.email, cod: cod });
+            const codHash = Bcrypt.Hash(cod.toString());
 
             return 'Usuário criado com sucesso';
         } catch (error) {

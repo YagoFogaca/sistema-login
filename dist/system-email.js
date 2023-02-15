@@ -5,8 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthenticationEmail = void 0;
 const nodemailer_1 = __importDefault(require("nodemailer"));
-function AuthenticationEmail(to) {
-    const cod = Math.floor(Math.random() * 89999) + 10000;
+function AuthenticationEmail({ cod, to }) {
     const transporter = nodemailer_1.default.createTransport({
         service: 'gmail',
         auth: {
@@ -18,12 +17,7 @@ function AuthenticationEmail(to) {
         from: 'doe.jhon.fogaca@gmail.com',
         to: to,
         subject: 'Autenticação do Email',
-        text: `Você realizou o cadastro na nossa plataforma, agora você precisa autenticar o seu Email.
-        \n\n
-        Seu código de validação é : ${cod}
-        \n\n
-        Obrigado pela atenção! Att Yago Fogaça
-        `,
+        text: `Você realizou o cadastro na nossa plataforma, agora você precisa autenticar o seu Email.\n\n Seu código de validação é : ${cod}\n\n Obrigado pela atenção! Att Yago Fogaça.`,
     };
     const res = transporter.sendMail(options, function (error, info) {
         if (error) {

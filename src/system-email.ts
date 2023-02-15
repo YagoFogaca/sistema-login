@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
+import { TAuthenticationEmail } from './types';
 
-export function AuthenticationEmail(to: string) {
-    const cod = Math.floor(Math.random() * 89999) + 10000;
+export function AuthenticationEmail({ cod, to }: TAuthenticationEmail) {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
