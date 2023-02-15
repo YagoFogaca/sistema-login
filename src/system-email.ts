@@ -14,12 +14,7 @@ export function AuthenticationEmail(to: string) {
         from: 'doe.jhon.fogaca@gmail.com',
         to: to,
         subject: 'Autenticação do Email',
-        text: `Você realizou o cadastro na nossa plataforma, agora você precisa autenticar o seu Email.
-        \n\n
-        Seu código de validação é : ${cod}
-        \n\n
-        Obrigado pela atenção! Att Yago Fogaça
-        `,
+        text: `Você realizou o cadastro na nossa plataforma, agora você precisa autenticar o seu Email.\n\n Seu código de validação é : ${cod}\n\n Obrigado pela atenção! Att Yago Fogaça.`,
     };
 
     const res = transporter.sendMail(options, function (error, info) {
