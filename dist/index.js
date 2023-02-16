@@ -22,16 +22,20 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importStar(require("express"));
 const generic_factory_1 = require("./generic.factory");
-// import cors from 'cors';
+const cors_1 = __importDefault(require("cors"));
 // import * as dotenv from 'dotenv';
 // dotenv.config();
 const port = process.env.PORT || 3000;
 const app = (0, express_1.default)();
 const router = (0, express_1.Router)();
 const index = (0, generic_factory_1.Factory)(router);
+app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use('/user', index.Routes());
 app.listen(port, () => {

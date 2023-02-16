@@ -1,6 +1,6 @@
 import express, { Router } from 'express';
 import { Factory } from './generic.factory';
-// import cors from 'cors';
+import cors from 'cors';
 // import * as dotenv from 'dotenv';
 // dotenv.config();
 
@@ -9,6 +9,7 @@ const app = express();
 const router = Router();
 const index = Factory(router);
 
+app.use(cors());
 app.use(express.json());
 app.use('/user', index.Routes());
 
