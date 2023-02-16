@@ -21,6 +21,6 @@ export class Api {
             body: JSON.stringify(cod),
         });
 
-        return await userAuth.json();
+        return await userAuth.text();
     }
 }
